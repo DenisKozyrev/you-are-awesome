@@ -1,8 +1,27 @@
 // DO WHATEVER YOU WANT HERE
 
-const createEnumerableProperty = () => {};
-const createNotEnumerableProperty = () => {};
-const createProtoMagicObject = () => {};
+const createEnumerableProperty = (property) => {
+    return property;
+};
+const createNotEnumerableProperty = (property) => {
+
+    Object.defineProperty(Object.prototype, property, {
+        enumerable: false,
+        get: function() {
+            return property;
+        },
+        set: function(value) {
+            property = value;
+        }
+    });
+    return property;
+};
+
+const createProtoMagicObject = () => {
+    function F() {}
+    F.prototype = Function.prototype;
+    return F;
+};
 const incrementor = () => {};
 const asyncIncrementor = () => {};
 const createIncrementer = () => {};
